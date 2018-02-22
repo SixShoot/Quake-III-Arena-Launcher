@@ -1,0 +1,22 @@
+{
+  "name": "Quake 3 Arena - Launcher",
+  "description": "Quake 3 Arena - Launcher",
+  "version": "1.0.0",
+  "main": "package/index.html",
+  "window": {
+    "title": "Quake 3 Arena - Launcher",
+    "icon": "package/resources/icon/icon.png",
+    "frame": false,
+    "width": 800,
+    "height": 550,
+    "position": "center",
+    "transparent": true,
+    "resizable": false,
+    "fullscreen": false,
+    "show": false
+  },
+  "webkit": {
+    "plugin": false
+  },
+  "chromium-args" : "--disable-gpu"
+}

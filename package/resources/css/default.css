@@ -1,0 +1,156 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: local('Ubuntu'), local('Ubuntu-Regular'),
+        url('../font/Ubuntu/Ubuntu-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+html, body, ul, li, p { margin: 0; padding: 0; }
+*:focus{ outline: none; }
+img { -webkit-user-drag: none; user-drag: none; }
+li { list-style: none; }
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body { width: 800px; height: 550px; overflow: hidden; border: 1px solid white; box-sizing: border-box; background: #000; }
+
+header { color: #fff; }
+#drag-window { position: absolute; top: 0; left: 0; width: 100%; height: 33px; -webkit-app-region: drag; cursor: grab; }
+#controls { position: absolute; top: 5px; right: 10px;}
+#controls .button { background-color: rgba(0,0,0,0); display: inline-block; padding: 5px 10px 5px 10px; -webkit-app-region: no-drag; }
+#controls .button:hover { background-color: rgba(255,255,255,0.20);} 
+#controls > #close.button:hover { background-color: rgba(215,40,40,0.9);} 
+#minimize i { font-size:13px; }
+#close i { font-size:16px; }
+
+#top { background: url(../img/bg.png) no-repeat; width: 800px; height: 450px; box-sizing: border-box; position: relative; z-index: -1;}
+
+main { font-family: "Ubuntu"; color: #fff; font-size: 16px; }
+#message { text-align: center; margin-top: 10px; }
+
+.spinner {
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #4969af;
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.loadingBar {
+    height: 6px;
+    position: relative;
+    background: rgba(255,255,255,0.20);/* #555 */
+    border-radius: 25px;
+    padding: 5px 10px 5px 10px;
+    width: 250px;
+    margin: 5px auto 0 auto;
+}
+
+.loadingBar > .meter {
+    width: 0%;
+    display: block;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: inset 0 2px 9px rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.loadingBar:after {
+    content: attr(data-percent) "%";
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100%;
+    padding-left: 5px;
+}
+
+.loadingBar[data-percent="100"] > .meter {
+      border-top-right-radius:20px;
+      border-bottom-right-radius:20px;
+}
+
+.meter.blue {
+    background-color: #4969af;
+    background-image: linear-gradient(to bottom, #4969af, #375db3);
+}
+
+.btn {
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #4969af;
+  padding: 10px 30px 10px 30px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #375db3;
+  text-decoration: none;
+}
+
+#playBtn {
+  display: table;
+  margin: 10px auto 0 auto;
+}
+#playBtn { box-shadow: 0 0 10px #3f4758, 0 0 20px #3f68b1, 0 0 30px #3864b3, 0 0 40px #375db3, 0 0 70px #4969af, 0 0 80px #3864b3, 0 0 100px #3864b3, 0 0 150px #3f68b1; }
+#playBtn.hide { display: none;}
+
+
+footer { color: white; position: fixed; bottom: 5px; right: 5px; font-family: "Ubuntu"; font-size: 14px;}
+
+.visible { visibility: visible; }
+.hidden { visibility: hidden; }
