@@ -30,7 +30,9 @@ Please note that the launcher uses unzip.exe to unzip the update.
 
 Screenshot:
 -----------
-
+![play](https://user-images.githubusercontent.com/14090532/36554341-995074c8-1831-11e8-9a6d-d49b1724760f.png)
+![checking updates](https://user-images.githubusercontent.com/14090532/36554347-9ea0d2ba-1831-11e8-94ff-389642a8852c.png)
+![downloading update](https://user-images.githubusercontent.com/14090532/36554354-a210c720-1831-11e8-8b94-cf9276d1957a.png)
 
 Legal
 -----
