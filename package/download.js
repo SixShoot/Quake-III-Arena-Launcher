@@ -20,15 +20,32 @@ function wget(file_url,destDir,callback, progressBar = false){
   var request = http.get(url_data, function (response) {
   
                 var fsize = response.headers['content-length'];
+                var startDownloadTime = Date.now();
+                var elapsedTime = 0;
+                var speed = [];
+                var averageSpeed = 0;
+                var previousElapsedTime = 0;
                 progressBar.alterClass('hidden','visible');
                 message.text('Downloading update');
                 response.pipe(file);
                 response.on('data', function(data) {
-                      progress(100-(((fsize-file.bytesWritten)/fsize)*100), progressBar);
+                      elapsedTime = Math.floor((Date.now() - startDownloadTime) / 1000);
+                      if ( elapsedTime >= 1 ) {
+                        var currentSpeed = Math.floor((file.bytesWritten / 1000) / elapsedTime);
+                        speed.push(currentSpeed);
+                      }
+                      if ( elapsedTime >= 1 && speed.length >= 1 && elapsedTime == previousElapsedTime+1) { 
+                        var sum = speed.reduce((a, b) => a + b, 0);
+                        averageSpeed = Math.floor(sum / speed.length);
+                        speed = [];
+                      }
+                      progress(Math.floor(100-(((fsize-file.bytesWritten)/fsize)*100)), averageSpeed, progressBar);
+                      previousElapsedTime = elapsedTime;
+                      
                 });
                 response.on('end', function() {
                       file.end();
-                      progress(100, progressBar);
+                      progress(100, 0, progressBar);
                       callback(destDir+file_name);
                 });
               });
@@ -46,9 +63,10 @@ function wget(file_url,destDir,callback, progressBar = false){
    }
 }
 
-function progress(percent, progressBar) {
+function progress(percent, speed, progressBar) {
     progressBar.children('.meter').css( "width", parseInt(percent)+"%" );
-    progressBar.attr("data-percent", Math.floor(percent).toString()); 
+    progressBar.attr("data-percent", percent.toString());
+    progressBar.attr("data-speed",  speed.toString()); 
 }
 
 isDir = function(dpath) {
