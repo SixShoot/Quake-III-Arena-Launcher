@@ -50,7 +50,13 @@ var remoteVersion = "";
               url_quake3e_changelog = "http://www.edawn-mod.org/binaries/quake3e-changes.txt";
               update_file_list = "baseq3\pak8a.pk3 quake3e.exe quake3e.x64.exe";
           } 
-          wget(url_quake3e_changelog,tmpDir,function(filePath){
+          wget(url_quake3e_changelog,tmpDir
+          ,function(){ 
+            spinner.addClass('hidden');
+            rmdirf(tmpDir);
+            display_play_button();
+          }
+          ,function(filePath){
 
                   getLines(filePath, 1, function (err, lines) {
                     remoteVersion = lines[0].replace(':','').split("-");
@@ -69,7 +75,13 @@ var remoteVersion = "";
                     
                     if (mustUpdate) {
 
-                        wget(url_quake3e_latest,tmpDir,function(filePath){
+                        wget(url_quake3e_latest,tmpDir
+                         ,function(){ 
+                           spinner.addClass('hidden');
+                           rmdirf(tmpDir);
+                           display_play_button();
+                         }
+                        ,function(filePath){
                             
                                   var cmdline = ['--uo', filePath,'-d', nwDir];
                                   var file_list = update_file_list.split(" ");
@@ -168,15 +180,19 @@ function display_play_button() {
 }
 
 function rmdirf(dir_path) {
-    if (fs.existsSync(dir_path)) {
-        fs.readdirSync(dir_path).forEach(function(entry) {
-            var entry_path = path.join(dir_path, entry);
-            if (fs.lstatSync(entry_path).isDirectory()) {
-                rmdirf(entry_path);
-            } else {
-                fs.unlinkSync(entry_path);
-            }
-        });
-        fs.rmdirSync(dir_path);
-    }
+   try {
+      if (fs.existsSync(dir_path)) {
+          fs.readdirSync(dir_path).forEach(function(entry) {
+              var entry_path = path.join(dir_path, entry);
+              if (fs.lstatSync(entry_path).isDirectory()) {
+                  rmdirf(entry_path);
+              } else {
+                  fs.unlinkSync(entry_path);
+              }
+          });
+          fs.rmdirSync(dir_path);
+      }
+   }catch(e){
+      console.log(e);
+   }
 }

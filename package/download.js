@@ -1,4 +1,4 @@
-function wget(file_url,destDir,callback, progressBar = false){
+function wget(file_url,destDir,errorCallback, callback, progressBar = false){
   
   var url = require('url');
   var http = require('http');
@@ -61,6 +61,14 @@ function wget(file_url,destDir,callback, progressBar = false){
               });
    
    }
+    request.setTimeout(2000, function(){
+      request.abort();
+    });
+    request.on('error', function(e){
+      console.log(e);
+      file.end();
+      errorCallback();
+    });
 }
 
 function progress(percent, speed, progressBar) {
