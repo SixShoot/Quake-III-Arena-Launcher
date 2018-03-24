@@ -1,7 +1,7 @@
 {
   "name": "Quake 3 Arena - Launcher",
   "description": "Quake 3 Arena - Launcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "package/index.html",
   "window": {
     "title": "Quake 3 Arena - Launcher",
