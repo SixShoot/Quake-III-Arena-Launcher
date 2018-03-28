@@ -235,8 +235,3 @@ function copy(from,to){
       }
     });      
 }
-
-function clean(str) {
-    str = str.toString();
-    return str.replace(/<\/?[^>]+>/gi, '').replace(/\.[^/.]+$/, "");
-}
