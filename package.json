@@ -1,7 +1,7 @@
 {
-  "name": "Quake 3 Arena - Launcher",
+  "name": "com.xan105.q3launcher",
   "description": "Quake 3 Arena - Launcher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "package/index.html",
   "window": {
     "title": "Quake 3 Arena - Launcher",

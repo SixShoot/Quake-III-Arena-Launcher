@@ -13,7 +13,7 @@ function wget(file_url,destDir,errorCallback, callback, progressBar = false){
 
   mkdirp(destDir);
 
-  var file = fs.createWriteStream(destDir+file_name);
+  var file = fs.createWriteStream(destDir+"\\"+file_name);
   
   if (progressBar != false ) {
   
@@ -46,7 +46,7 @@ function wget(file_url,destDir,errorCallback, callback, progressBar = false){
                 response.on('end', function() {
                       file.end();
                       progress(100, 0, progressBar);
-                      callback(destDir+file_name);
+                      callback(destDir+"\\"+file_name);
                 });
               });
    }
@@ -56,7 +56,7 @@ function wget(file_url,destDir,errorCallback, callback, progressBar = false){
                 response.pipe(file);
                 response.on('end', function() {
                         file.end();
-                        callback(destDir+file_name);
+                        callback(destDir+"\\"+file_name);
                 });
               });
    
@@ -65,7 +65,7 @@ function wget(file_url,destDir,errorCallback, callback, progressBar = false){
       request.abort();
     });
     request.on('error', function(e){
-      console.log(e);
+      log(e);
       file.end();
       errorCallback();
     });
@@ -77,14 +77,14 @@ function progress(percent, speed, progressBar) {
     progressBar.attr("data-speed",  speed.toString()); 
 }
 
-isDir = function(dpath) {
+function isDir(dpath) {
     try {
         return fs.lstatSync(dpath).isDirectory();
     } catch(e) {
         return false;
     }
 };
-mkdirp = function(dirname) {
+function mkdirp(dirname) {
     dirname = path.normalize(dirname).split(path.sep);
     dirname.forEach((sdir,index)=>{
         var pathInQuestion = dirname.slice(0,index+1).join(path.sep);
