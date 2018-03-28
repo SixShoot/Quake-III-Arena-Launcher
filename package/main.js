@@ -124,6 +124,7 @@ const iniFile = {
                                                  config.version.build = remoteVersion[0]+"-"+remoteVersion[1]+"-"+remoteVersion[2];
                                                  fs.writeFileSync(iniFile.version, ini.stringify(config), 'utf8');
                                                  log("Update complete");
+                                                 display_play_button();
                                        }); 
                                      }
                                      else {
@@ -132,8 +133,8 @@ const iniFile = {
                                           copy(tmpDir+"\\"+file,App.path.self+"\\"+file);
                                           log("Reverting "+file);
                                         });
+                                        display_play_button();
                                      }
-                                     display_play_button();
                                   });
                         },progressBar);
                     }
@@ -225,7 +226,7 @@ function copy(from,to){
     fs.stat(from, function(err, stat) {
       if(err == null) {
         try{
-          exec('copy /Y "'+from+'" "'+to+'"',{windowsHide: true});
+          exec('echo F|xcopy /Y "'+from+'" "'+to+'"',{windowsHide: true});
         }
         catch(e){
           log(e);
